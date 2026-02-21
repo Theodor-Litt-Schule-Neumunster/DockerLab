@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    environment:
+      - PUID=1000
+      - PGID=1000
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./homepage-config:/app/config
+    restart: unless-stopped
+
+  windowsserver2022:
+    image: dockurr/windows
+    container_name: windowsserver2022
+    environment:
+      VERSION: "2022"
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8006:8006
+      - 3390:3389/tcp
+      - 3390:3389/udp
+    volumes:
+      - ./windowsserver2022:/storage
+    restart: always
+    stop_grace_period: 2m
+
+  debian:
+    image: qemux/qemu
+    container_name: debian
+    environment:
+      BOOT: "debian"
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8007:8006
+    volumes:
+      - ./debian:/storage
+    restart: always
+    stop_grace_period: 2m
+
+  vscode:
+    build:
+      context: ./vscode-docker
+    container_name: vscode
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./vscode-data:/home/coder/project
+      - ./vscode-config:/home/coder/.local/share/code-server
+    command:
+      - "code-server"
+      - "--bind-addr"
+      - "0.0.0.0:8080"
+      - "--auth"
+      - "none"
+      - "/home/coder/project"
+    networks:
+      - devnet
+
+networks:
+  devnet:
+    driver: bridge

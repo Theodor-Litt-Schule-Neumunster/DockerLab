@@ -80,3 +80,20 @@ Eine virtuelle Maschine mit dem Betriebssystem Debian.
 ## Konfiguration
 
 Jeder Dienst speichert seine Daten und Konfiguration in lokalen Ordnern, die im `docker-compose.yml` unter `volumes` definiert sind. Dies ermöglicht es Ihnen, Anpassungen vorzunehmen und sicherzustellen, dass Ihre Daten auch nach einem Neustart der Container erhalten bleiben.
+
+## Lizenz
+
+- Windows
+  > https://github.com/dockur/windows
+  > Lizenz: GNU General Public License v3.0 (GPL-3.0)
+  > Copyright © dockur contributors
+
+- Qemu
+  > https://github.com/qemus/qemu
+  > Lizenz: GNU General Public License v2.0 (GPL-2.0)
+  > Copyright © QEMU contributors
+
+- Homepage
+  > https://github.com/gethomepage/homepage
+  > Lizenz: GNU General Public License v3.0 (GPL-3.0)
+  > Copyright © Homepage Contributors

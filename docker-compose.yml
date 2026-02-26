@@ -1,19 +1,21 @@
-version: '3.8'
-
 services:
-  homepage:
-    image: ghcr.io/gethomepage/homepage:latest
-    container_name: homepage
-    environment:
-      - PUID=1000
-      - PGID=1000
+  modern-homepage:
+    build:
+      context: ./homepage-data
+      dockerfile: Dockerfile.homepage
+    container_name: modern-homepage
     ports:
       - "3000:3000"
     volumes:
-      - ./homepage-config:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./homepage-data:/app
     restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - devnet
 
-  windowsserver2022:
+  windowsserver:
     image: dockurr/windows
     container_name: windowsserver2022
     environment:
@@ -29,8 +31,10 @@ services:
       - 3390:3389/udp
     volumes:
       - ./windowsserver2022:/storage
-    restart: always
+    restart: "no"
     stop_grace_period: 2m
+    networks:
+      - devnet
 
   debian:
     image: qemux/qemu
@@ -46,14 +50,16 @@ services:
       - 8007:8006
     volumes:
       - ./debian:/storage
-    restart: always
+    restart: "no"
     stop_grace_period: 2m
+    networks:
+      - devnet
 
   vscode:
     build:
       context: ./vscode-docker
     container_name: vscode
-    restart: unless-stopped
+    restart: "no"
     ports:
       - "8080:8080"
     volumes:

@@ -6,7 +6,6 @@ Docker for School ist eine vor konfigurierte Docker-Umgebung für Schulen, mit d
 - [Voraussetzungen](#voraussetzungen)
 - [Schnellstart](#schnellstart)
 - [Verfügbare Dienste](#verfügbare-dienste)
-  - [Homepage](#homepage)
   - [VS Code Server](#vs-code-server)
   - [Windows Server 2022](#windows-server-2022)
   - [Debian](#debian)
@@ -30,13 +29,6 @@ Stellen Sie sicher, dass auf Ihrem System die folgenden Anwendungen installiert 
 4. Öffnen Sie Ihren Webbrowser und navigieren Sie zu `http://localhost:3000`, um auf das Dashboard zuzugreifen.
 
 ## Verfügbare Dienste
-
-### Homepage
-
-Ein zentrales Dashboard, das eine Übersicht über alle laufenden Dienste bietet und den Zugriff darauf erleichtert.
-
-- **URL:** `http://localhost:3000`
-- **Konfiguration:** Die Konfigurationsdateien befinden sich im Ordner `./homepage-config`.
 
 ### VS Code Server
 
@@ -92,8 +84,3 @@ Jeder Dienst speichert seine Daten und Konfiguration in lokalen Ordnern, die im 
   > https://github.com/qemus/qemu
   > Lizenz: GNU General Public License v2.0 (GPL-2.0)
   > Copyright © QEMU contributors
-
-- Homepage
-  > https://github.com/gethomepage/homepage
-  > Lizenz: GNU General Public License v3.0 (GPL-3.0)
-  > Copyright © Homepage Contributors
